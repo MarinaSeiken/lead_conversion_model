@@ -1,4 +1,5 @@
 import logging
+import os
 
 import numpy as np
 import pandas as pd
@@ -14,7 +15,8 @@ class Data:
         self.y = None
 
     def read_data(self):
-        file_path = r'C:\Users\Marin\Documents\trellis\code\lead_conversion_model\data\leads.csv'
+        folder_dir = os.path.dirname(os.path.realpath(__file__))
+        file_path = os.path.join(folder_dir, 'data/leads.csv')
         df = pd.read_csv(file_path, index_col='Lead Number')
 
         self.X = df.drop(self.target_name, axis=1)
