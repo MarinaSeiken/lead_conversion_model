@@ -40,7 +40,8 @@ class LeadScoringModel:
 
 class ModelSaver:
     def __init__(self):
-        self.model_dir = r'C:\Users\Marin\Documents\trellis\code\lead_conversion_model'
+        folder_dir = os.path.dirname(os.path.realpath(__file__))
+        self.model_dir = os.path.join(folder_dir, 'model')
         self.date_stamp = str(dt.date.today())
 
     def save(self, model):
@@ -48,12 +49,6 @@ class ModelSaver:
         with open(file_path, 'wb') as output_file:
             pickle.dump(model, output_file)
         logging.info(f'Saved {model._name} at {file_path}')
-
-    def load(self, file_name):
-        file_path = os.path.join(self.model_dir, f'{file_name}.pkl')
-        with open(file_path, 'rb') as f:
-            model = pickle.load(f)
-        return model
 
 
 def main():
