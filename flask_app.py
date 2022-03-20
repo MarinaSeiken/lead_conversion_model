@@ -2,11 +2,11 @@ import pickle
 import pandas as pd
 from flask import Flask, request, jsonify
 
-from src.model_training import LeadScoringModel
+from model_training import LeadScoringModel
 
 
 app = Flask(__name__)
-model = pickle.load(open('../model/lead_scoring_model_2022-03-19.pkl', 'rb'))
+model = pickle.load(open('model/lead_scoring_model_2022-03-19.pkl', 'rb'))
 
 
 @app.route('/predict', methods=['POST'])

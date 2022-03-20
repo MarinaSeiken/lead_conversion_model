@@ -7,7 +7,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.calibration import CalibratedClassifierCV
 
-from src.data_processing import Data, BoolFeatureBuilder, FeatureSelector
+from data_processing import Data, BoolFeatureBuilder, FeatureSelector
 
 
 logging.getLogger().setLevel(logging.INFO)
@@ -39,7 +39,7 @@ class LeadScoringModel:
 class ModelSaver:
     def __init__(self):
         folder_dir = os.path.dirname(os.path.realpath(__file__))
-        self.model_dir = os.path.join(folder_dir, '../model')
+        self.model_dir = os.path.join(folder_dir, 'model')
         self.date_stamp = str(dt.date.today())
 
     def save(self, model):
