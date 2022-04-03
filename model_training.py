@@ -14,8 +14,8 @@ logging.getLogger().setLevel(logging.INFO)
 
 
 class LeadScoringModel:
-    def __init__(self, model, transform_steps):
-        self.transform_pipeline = Pipeline(steps=transform_steps)
+    def __init__(self, model, transform_pipeline):
+        self.transform_pipeline = transform_pipeline
         self.model = model
         self._name = 'lead_scoring_model'
 
@@ -81,11 +81,13 @@ def main():
         'City_Other Cities', 'City_Thane & Outskirts', 'A free copy of Mastering The Interview_Yes',
         'Last Notable Activity_Email Opened', 'Last Notable Activity_Modified', 'Last Notable Activity_SMS Sent']
 
-    # use full dataset for final model
+    transform_pipeline = Pipeline(steps=[('bool_feature_builder', BoolFeatureBuilder(cat_col_dict)),
+                                         ('feature_selector', FeatureSelector(model_cols))])
     model = LeadScoringModel(
-        transform_steps=[('bool_feature_builder', BoolFeatureBuilder(cat_col_dict)),
-                         ('feature_selector', FeatureSelector(model_cols))],
+        transform_pipeline=transform_pipeline,
         model=RandomForestClassifier(n_estimators=500, min_samples_leaf=20, max_features='auto', n_jobs=-1))
+
+    # use full dataset for final model
     model.fit(data.X, data.y, calibrate=True)
 
     model_saver = ModelSaver()
