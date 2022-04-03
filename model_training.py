@@ -54,32 +54,33 @@ def main():
     data.read_data()
 
     cat_col_dict = {
-        'A free copy of Mastering The Interview': ['Yes'],
-        'City': ['Other Cities', 'Thane & Outskirts'],
-        'Do Not Email': ['Yes'],
-        'Last Activity': ['Email Opened', 'Olark Chat Conversation', 'Page Visited on Website', 'SMS Sent'],
-        'Last Notable Activity': ['Email Opened', 'Modified', 'SMS Sent'],
         'Lead Origin': ['Landing Page Submission', 'Lead Add Form'],
-        'Lead Quality': ['Low in Relevance', 'Might be', 'Not Sure', 'Worst'],
-        'Lead Source': ['Direct Traffic', 'Google', 'Olark Chat', 'Organic Search'],
+        'Lead Source': ['Direct Traffic', 'Google', 'Olark Chat', 'Organic Search'], 'Do Not Email': ['Yes'],
+        'Last Activity': ['Email Opened', 'Olark Chat Conversation', 'Page Visited on Website', 'SMS Sent'],
+        'Last Notable Activity': ['Modified'],
         'Specialization': ['Finance Management', 'Human Resource Management', 'Marketing Management',
                            'Operations Management', 'Others'],
-        'Tags': ['Interested in other courses', 'Ringing', 'Will revert after reading the email'],
-        'What is your current occupation': ['Unemployed', 'Working Professional']
+        'What is your current occupation': ['Unemployed', 'Working Professional'],
+        'City': ['Other Cities', 'Thane & Outskirts'],
+        'A free copy of Mastering The Interview': ['Yes'],
+        'Lead Quality': ['Low in Relevance', 'Might be', 'Not Sure', 'Worst'],
+        'Tags': ['Interested in other courses', 'Ringing', 'Will revert after reading the email']
     }
 
     model_cols = [
-        'TotalVisits', 'Total Time Spent on Website', 'Page Views Per Visit', 'Lead Origin_Landing Page Submission',
-        'Lead Origin_Lead Add Form', 'Lead Source_Direct Traffic', 'Lead Source_Google', 'Lead Source_Olark Chat',
-        'Lead Source_Organic Search', 'Do Not Email_Yes', 'Last Activity_Email Opened',
-        'Last Activity_Olark Chat Conversation', 'Last Activity_Page Visited on Website', 'Last Activity_SMS Sent',
+        'TotalVisits', 'Total Time Spent on Website', 'Page Views Per Visit',
+        'Lead Origin_Landing Page Submission', 'Lead Origin_Lead Add Form',
+        'Lead Source_Direct Traffic', 'Lead Source_Google', 'Lead Source_Olark Chat', 'Lead Source_Organic Search',
+        'Do Not Email_Yes',
+        'Last Activity_Email Opened', 'Last Activity_Olark Chat Conversation', 'Last Activity_Page Visited on Website',
+        'Last Activity_SMS Sent',
         'Specialization_Finance Management', 'Specialization_Human Resource Management',
         'Specialization_Marketing Management', 'Specialization_Operations Management', 'Specialization_Others',
         'What is your current occupation_Unemployed', 'What is your current occupation_Working Professional',
         'Tags_Interested in other courses', 'Tags_Ringing', 'Tags_Will revert after reading the email',
         'Lead Quality_Low in Relevance', 'Lead Quality_Might be', 'Lead Quality_Not Sure', 'Lead Quality_Worst',
-        'City_Other Cities', 'City_Thane & Outskirts', 'A free copy of Mastering The Interview_Yes',
-        'Last Notable Activity_Email Opened', 'Last Notable Activity_Modified', 'Last Notable Activity_SMS Sent']
+        'City_Other Cities', 'City_Thane & Outskirts',
+        'A free copy of Mastering The Interview_Yes']
 
     transform_pipeline = Pipeline(steps=[('bool_feature_builder', BoolFeatureBuilder(cat_col_dict)),
                                          ('feature_selector', FeatureSelector(model_cols))])
